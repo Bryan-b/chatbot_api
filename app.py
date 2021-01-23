@@ -1,24 +1,13 @@
-from flask import Flask ,jsonify,request
-from chatterbot import ChatBot
-from chatterbot.trainers import ListTrainer
-
-
-chatbot = ChatBot('Charlie')
-
-trainer = ListTrainer(chatbot)
-
-trainer.train([
-    "Hi, can I help you?",
-    "Sure, I'd like to book a flight to Iceland.",
-    "Your flight has been booked."
-])
+from flask import Flask ,jsonify
+from flask_restful import Resource, Api
+from route import CreateResource
 
 app = Flask(__name__)
+api = Api(app)
 
-@app.route('/')
-def index():
-    # response = chatbot.get_response('I would like to book a flight.')
-    return str(chatbot.get_response('I would like to book a flight.'))
+# API ENDPOINT RESOURCE INITIALIZED HERE
+# GO TO /route DIRECTORY TO SEE MORE
+CreateResource(api)
 
 if __name__ == '__main__':
     app.run(debug=True)
